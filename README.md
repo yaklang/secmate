@@ -1,5 +1,4 @@
-Coming Soon...
-为保障使用体验，紧急修几个bug，预计3.6号之前发预览版
+# 发布SecMate v1.0.0-alpha版本，前往右侧release下载体验
 
 # SecMate-万径千机 - 网络安全AI智能体
 
