@@ -1,0 +1,51 @@
+name: Test GitHub Secrets
+
+on:
+  workflow_dispatch:  # 允许手动触发工作流
+  push:
+    branches: [ main ]  # 当推送到 main 分支时也会触发
+
+jobs:
+  test-secrets:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Test Secret Output
+        env:
+          B64_APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE_BASE64 }}
+          PASSWORD_APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          OSS_KEY_ID: ${{ secrets.OSS_KEY_ID }}
+          OSS_KEY_SECRET: ${{ secrets.OSS_KEY_SECRET }}
+        run: |
+          echo "测试 Secret 是否正确设置..."
+          if [ -n "$B64_APPLE_CERTIFICATE" ]; then
+            echo "B64_APPLE_CERTIFICATE 已设置"
+            # 注意：不要直接打印 secret 的值，这会造成安全隐患
+            echo "B64_APPLE_CERTIFICATE 的长度: ${#B64_APPLE_CERTIFICATE}"
+          else
+            echo "B64_APPLE_CERTIFICATE 未设置"
+          fi
+          
+          if [ -n "$PASSWORD_APPLE_CERTIFICATE" ]; then
+            echo "PASSWORD_APPLE_CERTIFICATE 已设置"
+            echo "PASSWORD_APPLE_CERTIFICATE 的长度: ${#PASSWORD_APPLE_CERTIFICATE}"
+          else
+            echo "PASSWORD_APPLE_CERTIFICATE 未设置"
+          fi 
+
+          if [ -n "$OSS_KEY_ID" ]; then
+            echo "OSS_KEY_ID 已设置"
+            echo "OSS_KEY_ID 的长度: ${#OSS_KEY_ID}"
+          else
+            echo "OSS_KEY_ID 未设置"
+          fi
+          
+          if [ -n "$OSS_KEY_SECRET" ]; then
+            echo "OSS_KEY_SECRET 已设置"
+            echo "OSS_KEY_SECRET 的长度: ${#OSS_KEY_SECRET}"
+          else
+            echo "OSS_KEY_SECRET 未设置"
+          fi
