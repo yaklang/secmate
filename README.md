@@ -1,4 +1,4 @@
-# 发布SecMate v1.0.6版本，前往右侧release下载体验
+# 发布SecMate v1.0.7版本，前往右侧release下载体验
 
 # SecMate-万径千机 - 网络安全AI智能体
 
